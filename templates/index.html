@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-3xl font-bold mb-4">Available Products</h1>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    {% for product in products %}
+        <div class="bg-white p-4 rounded shadow">
+            <h2 class="text-xl font-semibold">{{ product.title }}</h2>
+            <p class="text-gray-600">{{ product.description }}</p>
+            <p class="text-lg font-bold">₹{{ product.price }}</p>
+            <a href="{{ url_for('product', id=product.id) }}" class="text-blue-600 hover:underline">View Details</a>
+        </div>
+    {% else %}
+        <p>No products available.</p>
+    {% endfor %}
+</div>
+{% endblock %}

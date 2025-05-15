@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini OLX</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-blue-600 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="{{ url_for('index') }}" class="text-2xl font-bold">Mini OLX</a>
+            <div class="flex items-center space-x-4">
+                <form action="{{ url_for('search') }}" method="GET" class="flex">
+                    <input type="text" name="query" placeholder="Search products..." class="p-2 rounded-l-md" style="color:black;">
+                    <button type="submit" class="bg-blue-700 p-2 rounded-r-md">Search</button>
+                </form>
+                {% if session.username %}
+                    <a href="{{ url_for('sell') }}" class="hover:underline">Sell</a>
+                    <a href="{{ url_for('wishlist') }}" class="hover:underline">Wishlist</a>
+                    <a href="{{ url_for('history') }}" class="hover:underline">History</a>
+                    <a href="{{ url_for('logout') }}" class="hover:underline">Logout ({{ session.username }})</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="hover:underline">Login</a>
+                    <a href="{{ url_for('register') }}" class="hover:underline">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto p-4">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="bg-green-200 text-green-800 p-2 rounded mb-4">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-3xl font-bold mb-4">{{ product.title }}</h1>
+<div class="bg-white p-4 rounded shadow max-w-md">
+    <p class="text-gray-600">{{ product.description }}</p>
+    <p class="text-lg font-bold">₹{{ product.price }}</p>
+    <p class="text-gray-700">Seller: {{ product.username }}</p>
+    {% if product.sold == 0 %}
+        <a href="{{ url_for('buy', id=product.id) }}" class="bg-blue-600 text-white p-2 rounded inline-block mt-2">Buy Now</a>
+        <a href="{{ url_for('add_to_wishlist', id=product.id) }}" class="bg-gray-600 text-white p-2 rounded inline-block mt-2">Add to Wishlist</a>
+    {% else %}
+        <p class="text-red-600">Sold</p>
+    {% endif %}
+</div>
+{% endblock %}

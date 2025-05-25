@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <h1 class="text-3xl font-bold mb-4">Sell a Product</h1>
-<form method="POST" class="max-w-md">
+<form method="POST" enctype="multipart/form-data" class="max-w-md">
     <div class="mb-4">
         <label for="title" class="block text-gray-700">Title</label>
         <input type="text" name="title" id="title" class="w-full p-2 border rounded" required>
@@ -13,6 +13,20 @@
     <div class="mb-4">
         <label for="price" class="block text-gray-700">Price (₹)</label>
         <input type="number" step="0.01" name="price" id="price" class="w-full p-2 border rounded" required>
+    </div>
+    <div class="mb-4">
+        <label for="category" class="block text-gray-700">Category</label>
+        <select name="category" id="category" class="w-full p-2 border rounded" required>
+            <option value="Electronics">Electronics</option>
+            <option value="Furniture">Furniture</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Books">Books</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+    <div class="mb-4">
+        <label for="image" class="block text-gray-700">Product Image</label>
+        <input type="file" name="image" id="image" class="w-full p-2 border rounded" accept="image/*">
     </div>
     <button type="submit" class="bg-blue-600 text-white p-2 rounded">List Product</button>
 </form>

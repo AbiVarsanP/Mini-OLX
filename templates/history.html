@@ -6,9 +6,15 @@
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
     {% for product in sold %}
         <div class="bg-white p-4 rounded shadow">
+            {% if product.image_path %}
+                <img src="{{ url_for('static', filename=product.image_path) }}" alt="{{ product.title }}" class="w-full h-48 object-cover mb-2 rounded" onerror="this.src='{{ url_for('static', filename='default_image.jpg') }}'">
+            {% else %}
+                <img src="{{ url_for('static', filename='default_image.jpg') }}" alt="No image available" class="w-full h-48 object-cover mb-2 rounded">
+            {% endif %}
             <h3 class="text-xl font-semibold">{{ product.title }}</h3>
             <p class="text-gray-600">{{ product.description }}</p>
             <p class="text-lg font-bold">₹{{ product.price }}</p>
+            <p class="text-gray-700">Category: {{ product.category }}</p>
         </div>
     {% else %}
         <p>No products sold.</p>
@@ -19,9 +25,15 @@
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
     {% for product in bought %}
         <div class="bg-white p-4 rounded shadow">
+            {% if product.image_path %}
+                <img src="{{ url_for('static', filename=product.image_path) }}" alt="{{ product.title }}" class="w-full h-48 object-cover mb-2 rounded" onerror="this.src='{{ url_for('static', filename='default_image.jpg') }}'">
+            {% else %}
+                <img src="{{ url_for('static', filename='default_image.jpg') }}" alt="No image available" class="w-full h-48 object-cover mb-2 rounded">
+            {% endif %}
             <h3 class="text-xl font-semibold">{{ product.title }}</h3>
             <p class="text-gray-600">{{ product.description }}</p>
             <p class="text-lg font-bold">₹{{ product.price }}</p>
+            <p class="text-gray-700">Category: {{ product.category }}</p>
         </div>
     {% else %}
         <p>No products bought.</p>

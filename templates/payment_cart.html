@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-3xl font-bold mb-4">Mock Payment for Cart</h1>
+<div class="bg-white p-4 rounded shadow max-w-md">
+    <p class="text-lg font-bold">Pay ₹{{ total_price }} for Cart Items</p>
+    <ul class="mb-4">
+        {% for item in cart_items %}
+            <li>{{ item.title }} (x{{ item.quantity }}) - ₹{{ item.price * item.quantity }}</li>
+        {% endfor %}
+    </ul>
+    <form method="POST" action="{{ url_for('buy_cart') }}">
+        <div class="mb-4">
+            <label for="card_number" class="block text-gray-700">Card Number</label>
+            <input type="text" name="card_number" id="card_number" class="w-full p-2 border rounded" placeholder="1234 5678 9012 3456" required>
+        </div>
+        <div class="mb-4">
+            <label for="expiry" class="block text-gray-700">Expiry (MM/YY)</label>
+            <input type="text" name="expiry" id="expiry" class="w-full p-2 border rounded" placeholder="12/25" required>
+        </div>
+        <div class="mb-4">
+            <label for="cvv" class="block text-gray-700">CVV</label>
+            <input type="text" name="cvv" id="cvv" class="w-full p-2 border rounded" placeholder="123" required>
+        </div>
+        <button type="submit" class="bg-blue-600 text-white p-2 rounded">Complete Mock Payment</button>
+    </form>
+</div>
+{% endblock %}

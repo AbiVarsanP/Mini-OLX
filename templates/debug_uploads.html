@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="text-3xl font-bold mb-4">Debug: Uploaded Images</h1>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    {% for file in files %}
+        <div class="bg-white p-4 rounded shadow">
+            <img src="{{ url_for('static', filename='uploads/' + file) }}" alt="{{ file }}" class="w-full h-48 object-cover mb-2 rounded">
+            <p>{{ file }}</p>
+        </div>
+    {% else %}
+        <p>No images uploaded.</p>
+    {% endfor %}
+</div>
+{% endblock %}
